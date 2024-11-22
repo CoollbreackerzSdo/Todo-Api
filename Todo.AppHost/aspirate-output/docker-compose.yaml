@@ -1,0 +1,64 @@
+services:
+  aspire-dashboard:
+    container_name: "aspire-dashboard"
+    image: "mcr.microsoft.com/dotnet/aspire-dashboard:8.0"
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
+    ports:
+    - target: 18888
+      published: 18888
+    restart: unless-stopped
+  todo-db:
+    container_name: "todo-db"
+    image: "docker.io/postgres:17.0-alpine3.20"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "scram-sha-256"
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "MhZ2rzIA9KTS9onS06EcDv"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "todo-db"
+    volumes:
+    - "todo:/var/lib/postgres"
+    ports:
+    - target: 5432
+      published: 5432
+    restart: unless-stopped
+  api:
+    container_name: "api"
+    image: "api:latest"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+      ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+      HTTP_PORTS: "8080"
+      ConnectionStrings__todo-db: "Host=todo-db;Port=5432;Username=postgres;Password=MhZ2rzIA9KTS9onS06EcDv"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "api"
+    ports:
+    - target: 8080
+      published: 10000
+    - target: 8443
+      published: 10001
+    restart: unless-stopped
+  client:
+    container_name: "client"
+    image: "client:latest"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+      ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+      HTTP_PORTS: "8080"
+      services__api__http__0: "http://api:8080"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: "client"
+    ports:
+    - target: 8080
+      published: 10002
+    - target: 8443
+      published: 10003
+    restart: unless-stopped
+volumes:
+  todo: {}

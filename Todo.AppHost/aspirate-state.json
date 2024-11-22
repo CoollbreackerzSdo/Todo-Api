@@ -1,0 +1,28 @@
+{
+  "projectPath": ".",
+  "outputPath": "aspirate-output",
+  "containerImageTags": [
+    "latest"
+  ],
+  "containerBuilder": "docker",
+  "outputFormat": "compose",
+  "privateRegistryEmail": "aspir8@aka.ms",
+  "includeDashboard": true,
+  "secrets": {
+    "salt": "rgSIJXcS/4yB5gRv",
+    "hash": "Z5mnrZkhRQaFT2pJkLY9aIhT9blXUQFS7anJ/jMKqAg=",
+    "secrets": {
+      "todo-db-password": {
+        "value": "rgSIJXcS/4yB5gRvtJz6nSOd99zyrPCKsNcUVDgwbHZ/t16YJ\u002BQrdAr60t8cqh8x1Es="
+      },
+      "todo-db": {
+        "POSTGRES_PASSWORD": "rgSIJXcS/4yB5gRvtJz6nSOd99zyrPCKsNcUVDgwbHZ/t16YJ\u002BQrdAr60t8cqh8x1Es="
+      },
+      "api": {
+        "ConnectionStrings__todo-db": "rgSIJXcS/4yB5gRvk51UMq\u002B5XiDX8PDkTmeG\u002BT03RTAwuXi9cYIbRQjF0/5YoW9mow9oyf/d4iD\u002BPnfZfOhoFFzx3ik\u002BI3NBS2IdfPwr9u79Hli\u002BhcNgwXZ/W0qvqj2g2W/cQQ=="
+      },
+      "client": {}
+    }
+  },
+  "processAllComponents": true
+}
