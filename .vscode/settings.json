@@ -1,0 +1,15 @@
+{
+  "cSpell.language": "en,es-ES",
+  "cSpell.words": [
+    "Antiforgery",
+    "Ardalis",
+    "Bson",
+    "hasher",
+    "Hasher",
+    "Hmac",
+    "Npgsql",
+    "postgres",
+    "postgrest",
+    "Serilog"
+  ]
+}
