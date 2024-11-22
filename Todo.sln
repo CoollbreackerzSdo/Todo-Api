@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Api", "Todo.Api\Todo.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Test", "Todo.Test\Todo.Test.csproj", "{B0973460-A858-4753-8DE4-8644AB4BCC32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Client", "Todo.Client\Todo.Client.csproj", "{A68C13B9-ABFD-469C-B5E2-F6CD0FD25033}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Shared", "Todo.Shared\Todo.Shared.csproj", "{14E0DB39-0093-4156-888F-828E13DD7012}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{B0973460-A858-4753-8DE4-8644AB4BCC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0973460-A858-4753-8DE4-8644AB4BCC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0973460-A858-4753-8DE4-8644AB4BCC32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68C13B9-ABFD-469C-B5E2-F6CD0FD25033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68C13B9-ABFD-469C-B5E2-F6CD0FD25033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68C13B9-ABFD-469C-B5E2-F6CD0FD25033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68C13B9-ABFD-469C-B5E2-F6CD0FD25033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14E0DB39-0093-4156-888F-828E13DD7012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14E0DB39-0093-4156-888F-828E13DD7012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14E0DB39-0093-4156-888F-828E13DD7012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14E0DB39-0093-4156-888F-828E13DD7012}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

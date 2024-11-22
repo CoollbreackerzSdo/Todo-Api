@@ -8,8 +8,12 @@ var postgres = builder
     .WithImage("postgres", "17.0-alpine3.20")
     .WithLifetime(ContainerLifetime.Persistent);
 
-builder.AddProject<Todo_Api>("api")
+var api = builder.AddProject<Todo_Api>("api")
     .WithReference(postgres)
     .WaitFor(postgres);
+
+builder.AddProject<Todo_Client>("client")
+    .WithReference(api)
+    .WaitFor(api);
 
 builder.Build().Run();
