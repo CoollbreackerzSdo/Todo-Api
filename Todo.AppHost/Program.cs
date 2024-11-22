@@ -12,7 +12,7 @@ var api = builder.AddProject<Todo_Api>("api")
     .WithReference(postgres)
     .WaitFor(postgres);
 
-builder.AddProject<Todo_Client>("client")
+builder.AddProject<Todo>("client")
     .WithReference(api)
     .WaitFor(api);
 

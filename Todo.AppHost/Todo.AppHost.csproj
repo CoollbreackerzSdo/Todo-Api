@@ -15,6 +15,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Todo.Api\Todo.Api.csproj" />
-    <ProjectReference Include="..\Todo.Client\Todo.Client.csproj" />
+    <ProjectReference Include="..\Todo\Todo.csproj" />
   </ItemGroup>
 </Project>
