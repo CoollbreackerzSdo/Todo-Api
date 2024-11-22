@@ -2,6 +2,13 @@ using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddProject<Todo_Api>("api");
+var postgres = builder
+    .AddPostgres("todo-db")
+    .WithVolume("Todo", "/var/lib/postgres")
+    .WithImage("postgres", "17.0-alpine3.20")
+    .WithLifetime(ContainerLifetime.Persistent);
+
+builder.AddProject<Todo_Api>("api")
+    .WithReference(postgres);
 
 builder.Build().Run();
