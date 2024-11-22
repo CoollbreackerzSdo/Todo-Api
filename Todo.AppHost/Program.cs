@@ -9,6 +9,7 @@ var postgres = builder
     .WithLifetime(ContainerLifetime.Persistent);
 
 builder.AddProject<Todo_Api>("api")
-    .WithReference(postgres);
+    .WithReference(postgres)
+    .WaitFor(postgres);
 
 builder.Build().Run();
