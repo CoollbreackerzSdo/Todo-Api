@@ -1,5 +1,7 @@
 
 
+using System.Linq.Expressions;
+
 using EntityFramework.Exceptions.Common;
 
 namespace Todo.Api.Common.Context.Repository;
@@ -24,7 +26,6 @@ public abstract class GenericRepository<T, TContext> : IRepository<T>
                 // TODO: eliminar el estado administrado (objetos administrados)
                 _context.Dispose();
             }
-
             // TODO: liberar los recursos no administrados (objetos no administrados) y reemplazar el finalizador
             // TODO: establecer los campos grandes como NULL
             _disposedValue = true;
@@ -37,14 +38,12 @@ public abstract class GenericRepository<T, TContext> : IRepository<T>
     //     // No cambie este código. Coloque el código de limpieza en el método "Dispose(bool disposing)".
     //     Dispose(disposing: false);
     // }
-
     public void Dispose()
     {
         // No cambie este código. Coloque el código de limpieza en el método "Dispose(bool disposing)".
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
-
     public async Task<Result> SaveChangesAsync(CancellationToken token = default)
     {
         try
@@ -61,8 +60,13 @@ public abstract class GenericRepository<T, TContext> : IRepository<T>
             return Result.Error();
         }
     }
-
-    private readonly TContext _context;
-    private readonly DbSet<T> _table;
+    public T? SingleOrDefault(Expression<Func<T, bool>> filter)
+        => _table.SingleOrDefault(filter);
+    public T? Find(EntityKey<Guid> key)
+        => _table.Find(key);
+    public TResult? SingleAsMapOrDefault<TResult>(EntityKey<Guid> key, Expression<Func<T, TResult>> map)
+        => _table.AsQueryable().Where(x => x.Key == key).Select(map).SingleOrDefault();
+    private protected readonly TContext _context;
+    private protected readonly DbSet<T> _table;
     private bool _disposedValue;
 }
