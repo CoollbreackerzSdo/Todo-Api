@@ -1,7 +1,10 @@
+using System.Security.Claims;
+
 using EntityFramework.Exceptions.PostgreSQL;
 
 using Todo.Api.Account.Context;
 using Todo.Api.Account.Context.Repository;
+using Todo.Api.Account.Handlers.Create;
 
 namespace Todo.Api;
 
@@ -22,6 +25,11 @@ public static class ServiceDiscovery
         //     options.UseNpgsql();
         // });
         return builder;
+    }
+    public static IServiceCollection AddHandlers(this IServiceCollection services)
+    {
+        services.AddTransient<IHandlerAsync<SignUpRequest, IEnumerable<Claim>>, SigUpHandler>();
+        return services;
     }
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
