@@ -8,6 +8,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+    app.MapMigrations();
     app.MapOpenApi();
 }
 
