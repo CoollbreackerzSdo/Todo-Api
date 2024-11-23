@@ -1,3 +1,7 @@
+
+
+using EntityFramework.Exceptions.Common;
+
 namespace Todo.Api.Common.Context.Repository;
 
 public abstract class GenericRepository<T, TContext> : IRepository<T>
@@ -40,6 +44,24 @@ public abstract class GenericRepository<T, TContext> : IRepository<T>
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
+
+    public async Task<Result> SaveChangesAsync(CancellationToken token = default)
+    {
+        try
+        {
+            await _context.SaveChangesAsync(token);
+            return Result.Success();
+        }
+        catch (UniqueConstraintException e)
+        {
+            return Result.Conflict($"Unique constraint {e.ConstraintName} violated. Duplicate value for {e.ConstraintProperties[0]}");
+        }
+        catch (Exception)
+        {
+            return Result.Error();
+        }
+    }
+
     private readonly TContext _context;
     private readonly DbSet<T> _table;
     private bool _disposedValue;
