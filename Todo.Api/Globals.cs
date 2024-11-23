@@ -4,5 +4,5 @@ global using Todo.Api.Common.Models;
 global using Todo.Api.Common.Context.Config;
 global using Todo.Api; 
 global using Todo.Api.Common.Handlers;
-global using Todo.Api.Common.Tools.Result;
+global using Ardalis.Result;
 global using Todo.Shared.Models.Request;
