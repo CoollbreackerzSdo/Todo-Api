@@ -5,7 +5,7 @@ using Todo.Api.Account.Mappers;
 
 namespace Todo.Api.Account.Handlers.Create;
 
-public class SigUpHandler(IUserRepository repository) : IHandlerAsync<SignUpRequest, IEnumerable<Claim>>
+public sealed class SigUpHandler(IUserRepository repository) : IHandlerAsync<SignUpRequest, IEnumerable<Claim>>
 {
     public async Task<Result<IEnumerable<Claim>>> Handle(SignUpRequest request, CancellationToken token = default)
     {
