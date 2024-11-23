@@ -6,6 +6,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddRepositories();
 builder.Services.AddHandlers();
 builder.Services.AddValidators();
+builder.Services.AddAuthServices();
+builder.Services.AddHahsServices();
 
 var app = builder.Build();
 
@@ -16,6 +18,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapDefaultEndpoints();
+app.MapEndpoints();
 
 app.Run();

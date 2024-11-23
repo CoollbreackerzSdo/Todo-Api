@@ -4,10 +4,15 @@ using EntityFramework.Exceptions.PostgreSQL;
 
 using FluentValidation;
 
+using Microsoft.AspNetCore.Identity;
+
 using Todo.Api.Account.Context;
 using Todo.Api.Account.Context.Repository;
+using Todo.Api.Account.Endpoints;
 using Todo.Api.Account.Handlers.Create;
+using Todo.Api.Account.Models;
 using Todo.Api.Account.Validators;
+using Todo.Api.Common.Auth.Providers;
 
 namespace Todo.Api;
 
@@ -34,8 +39,25 @@ public static class ServiceDiscovery
         services.AddSingleton<IValidator<SignUpRequest>, SignUpValidator>();
         return services;
     }
+    public static IServiceCollection AddHahsServices(this IServiceCollection services)
+    {
+        services.AddSingleton<IPasswordHasher<UserEntity>, PasswordHasher<UserEntity>>();
+        return services;
+    }
+    public static IServiceCollection AddAuthServices(this IServiceCollection services)
+    {
+        services.AddAuthentication(Schemes.Default)
+            .AddCookie(Schemes.Default, options =>
+            {
+
+            });
+        services.AddAuthorizationBuilder()
+            .AddDefaultPolicy(Policies.Global, options => options.AddAuthenticationSchemes([Schemes.Default]).RequireAuthenticatedUser());
+        return services;
+    }
     public static IServiceCollection AddHandlers(this IServiceCollection services)
     {
+        services.AddTransient<IHandlerAsync<SignInRequest, IEnumerable<Claim>>, SigInHandler>();
         services.AddTransient<IHandlerAsync<SignUpRequest, IEnumerable<Claim>>, SigUpHandler>();
         return services;
     }
@@ -47,5 +69,10 @@ public static class ServiceDiscovery
     public static void MapMigrations(this WebApplication app)
     {
         app.Services.CreateScope().ServiceProvider.GetRequiredService<AccountContext>().Database.Migrate();
+    }
+    public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder builder)
+    {
+        builder.MapAuthEndpoints();
+        return builder;
     }
 }
