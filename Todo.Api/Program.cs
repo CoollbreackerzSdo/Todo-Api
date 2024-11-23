@@ -3,6 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.AddDbContexts();
 builder.Services.AddOpenApi();
+builder.Services.AddRepositories();
 
 var app = builder.Build();
 

@@ -1,6 +1,7 @@
 using EntityFramework.Exceptions.PostgreSQL;
 
 using Todo.Api.Account.Context;
+using Todo.Api.Account.Context.Repository;
 
 namespace Todo.Api;
 
@@ -21,6 +22,11 @@ public static class ServiceDiscovery
         //     options.UseNpgsql();
         // });
         return builder;
+    }
+    public static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddTransient<IUserRepository, UserRepository>();
+        return services;
     }
     public static void MapMigrations(this WebApplication app)
     {
