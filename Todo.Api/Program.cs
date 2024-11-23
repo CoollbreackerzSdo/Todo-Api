@@ -1,5 +1,11 @@
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Host.UseSerilog((context, logger) =>
+{
+    logger.WriteTo.Console();
+});
 builder.AddServiceDefaults();
 builder.AddDbContexts();
 builder.Services.AddOpenApi();
