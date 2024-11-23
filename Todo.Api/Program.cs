@@ -4,6 +4,7 @@ builder.AddServiceDefaults();
 builder.AddDbContexts();
 builder.Services.AddOpenApi();
 builder.Services.AddRepositories();
+builder.Services.AddHandlers();
 
 var app = builder.Build();
 
