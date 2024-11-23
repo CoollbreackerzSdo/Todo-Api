@@ -2,9 +2,12 @@ using System.Security.Claims;
 
 using EntityFramework.Exceptions.PostgreSQL;
 
+using FluentValidation;
+
 using Todo.Api.Account.Context;
 using Todo.Api.Account.Context.Repository;
 using Todo.Api.Account.Handlers.Create;
+using Todo.Api.Account.Validators;
 
 namespace Todo.Api;
 
@@ -25,6 +28,11 @@ public static class ServiceDiscovery
         //     options.UseNpgsql();
         // });
         return builder;
+    }
+    public static IServiceCollection AddValidators(this IServiceCollection services)
+    {
+        services.AddSingleton<IValidator<SignUpRequest>, SignUpValidator>();
+        return services;
     }
     public static IServiceCollection AddHandlers(this IServiceCollection services)
     {

@@ -5,6 +5,7 @@ builder.AddDbContexts();
 builder.Services.AddOpenApi();
 builder.Services.AddRepositories();
 builder.Services.AddHandlers();
+builder.Services.AddValidators();
 
 var app = builder.Build();
 
