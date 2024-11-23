@@ -4,8 +4,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
+    .AddInteractiveWebAssemblyComponents()
     .AddInteractiveWebAssemblyComponents();
 
+builder.Services.AddHttpClient("server", options =>
+{
+    options.BaseAddress = new("https+http://api");
+    options.Timeout = TimeSpan.FromMilliseconds(500);
+    options.Dispose();
+});
 builder.AddServiceDefaults();
 
 var app = builder.Build();
@@ -31,6 +38,7 @@ app.MapStaticAssets();
 app.MapDefaultEndpoints();
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
+    .AddInteractiveServerRenderMode()
     .AddAdditionalAssemblies(typeof(Todo.Client._Imports).Assembly);
 
 app.Run();
