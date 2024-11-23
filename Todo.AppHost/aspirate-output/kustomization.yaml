@@ -1,0 +1,10 @@
+resources:
+- todo-db
+- api
+- client
+- dashboard.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+

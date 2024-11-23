@@ -4,10 +4,13 @@
   "containerImageTags": [
     "latest"
   ],
+  "imagePullPolicy": "IfNotPresent",
   "containerBuilder": "docker",
-  "outputFormat": "compose",
+  "outputFormat": "kustomize",
+  "skipFinalKustomizeGeneration": false,
   "privateRegistryEmail": "aspir8@aka.ms",
   "includeDashboard": true,
+  "useCustomNamespace": false,
   "secrets": {
     "salt": "rgSIJXcS/4yB5gRv",
     "hash": "Z5mnrZkhRQaFT2pJkLY9aIhT9blXUQFS7anJ/jMKqAg=",
