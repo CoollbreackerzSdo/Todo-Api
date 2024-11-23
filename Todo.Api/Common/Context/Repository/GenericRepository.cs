@@ -53,7 +53,7 @@ public abstract class GenericRepository<T, TContext> : IRepository<T>
         }
         catch (UniqueConstraintException e)
         {
-            return Result.Conflict($"Unique constraint {e.ConstraintName} violated. Duplicate value for {e.ConstraintProperties[0]}");
+            return Result.Conflict($"Duplicate value for {e.ConstraintProperties[0]}");
         }
         catch (Exception)
         {
