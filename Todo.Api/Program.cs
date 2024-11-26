@@ -1,3 +1,5 @@
+using Scalar.AspNetCore;
+
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapMigrations();
+    app.MapScalarApiReference(options =>
+        options.WithTheme(ScalarTheme.Moon)
+        .AddServer("https://localhost:3011")
+        .AddServer("http://localhost:3010"));
     app.MapOpenApi();
 }
 
