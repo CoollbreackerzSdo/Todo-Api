@@ -25,7 +25,6 @@
     <Using Include="Xunit"/>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Todo.Api\Todo.Api.csproj"/>
     <ProjectReference Include="..\Todo.AppHost\Todo.AppHost.csproj"/>
     <ProjectReference Include="..\Todo.Shared\Todo.Shared.csproj"/>
   </ItemGroup>

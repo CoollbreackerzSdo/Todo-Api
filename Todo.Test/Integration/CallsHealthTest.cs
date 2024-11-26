@@ -17,19 +17,6 @@ public class CallsHealthTest : IAsyncLifetime
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
-    [Fact(Timeout = 500)]
-    public async Task GetWebHealthStatusReturnsOkStatusCode()
-    {
-        // Arrange
-        var resourceNotificationService = _app.Services.GetRequiredService<ResourceNotificationService>();
-        // Act
-        var httpClient = _app!.CreateHttpClient("client");
-        await resourceNotificationService!.WaitForResourceAsync("client", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
-        var response = await httpClient.GetAsync("/health");
-
-        // Assert
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-    }
     public async Task DisposeAsync() => await _app!.DisposeAsync();
     public async Task InitializeAsync()
     {

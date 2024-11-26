@@ -10,9 +10,9 @@
       "request": "launch",
       "preLaunchTask": "build",
       // Si ha cambiado las plataformas de destino, asegúrese de actualizar la ruta de acceso del programa.
-      "program": "${workspaceFolder}/Server/Movie.AppHost/bin/Debug/net9.0/Movie.AppHost.dll",
+      "program": "${workspaceFolder}/Todo.AppHost/bin/Debug/net9.0/Todo.AppHost.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Server/Movie.AppHost",
+      "cwd": "${workspaceFolder}/Todo.AppHost",
       // Para obtener más información sobre el campo \"consola\", consulte https://aka.ms/VSCode-CS-LaunchJson-Console
       "console": "internalConsole",
       "stopAtEntry": false

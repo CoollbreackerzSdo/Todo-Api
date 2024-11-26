@@ -7,7 +7,7 @@
       "type": "process",
       "args": [
         "build",
-        "${workspaceFolder}/Server/Movie.AppHost/Movie.AppHost.csproj",
+        "${workspaceFolder}/Todo.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary;ForceNoAlign"
       ],
@@ -19,7 +19,7 @@
       "type": "process",
       "args": [
         "publish",
-        "${workspaceFolder}/Server/Movie.AppHost/Movie.AppHost.csproj",
+        "${workspaceFolder}/Todo.sln",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary;ForceNoAlign"
       ],
@@ -33,16 +33,23 @@
         "watch",
         "run",
         "--project",
-        "${workspaceFolder}/Server/Movie.AppHost/Movie.AppHost.csproj"
+        "${workspaceFolder}/Todo.sln"
       ],
       "problemMatcher": "$msCompile"
     },
     {
       "type": "dotnet",
-      "task": "watch Movie.AppHost",
-      "file": "C:\\Users\\ralbe\\source\\repos\\asp\\aspire\\Movie\\Server\\Movie.AppHost\\Movie.AppHost.csproj",
+      "task": "build",
+      "group": "build",
       "problemMatcher": [],
-      "label": "dotnet: watch Movie.AppHost"
+      "label": "dotnet: build"
+    },
+    {
+      "type": "dotnet",
+      "task": "watch Todo.AppHost",
+      "file": "C:\\Users\\ralbe\\source\\repos\\asp\\aspire\\Movie\\Todo.AppHost\\Todo.AppHost.csproj",
+      "problemMatcher": [],
+      "label": "dotnet: watch Todo.AppHost"
     }
   ]
 }
