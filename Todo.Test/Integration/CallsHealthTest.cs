@@ -1,10 +1,10 @@
 using Aspire.Hosting;
 
-namespace Todo.Test.Host;
+namespace Todo.Test.Integration;
 
 public class CallsHealthTest : IAsyncLifetime
 {
-    [Fact]
+    [Fact(Timeout = 100)]
     public async Task GetApiHealthStatusReturnsOkStatusCode()
     {
         // Arrange
@@ -17,7 +17,7 @@ public class CallsHealthTest : IAsyncLifetime
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
-    [Fact]
+    [Fact(Timeout = 500)]
     public async Task GetWebHealthStatusReturnsOkStatusCode()
     {
         // Arrange
