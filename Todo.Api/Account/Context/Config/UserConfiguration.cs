@@ -4,7 +4,7 @@ using Todo.Api.Account.Models;
 
 namespace Todo.Api.Account.Context.Config;
 
-public class UserConfiguration : ConfigurationBase<UserEntity>
+public sealed class UserConfiguration : ConfigurationBase<UserEntity>
 {
     public override void Configure(EntityTypeBuilder<UserEntity> builder)
     {

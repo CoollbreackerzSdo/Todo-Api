@@ -3,7 +3,7 @@ using Todo.Api.Account.Models;
 
 namespace Todo.Api.Account.Context;
 
-public class AccountContext(DbContextOptions<AccountContext> options) : DbContext(options)
+public sealed class AccountContext(DbContextOptions<AccountContext> options) : DbContext(options)
 {
     public DbSet<UserEntity> Users { get; init; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
