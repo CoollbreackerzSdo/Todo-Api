@@ -1,5 +1,5 @@
 
-namespace Todo.Api.Task.Models;
+namespace Todo.Api.TaskHear.Models;
 
 public enum TaskState
 {

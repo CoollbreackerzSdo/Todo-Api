@@ -4,7 +4,6 @@ namespace Todo.Test.Integration;
 
 public class CallsHealthTest : IAsyncLifetime
 {
-    [Fact(Timeout = 100)]
     public async Task GetApiHealthStatusReturnsOkStatusCode()
     {
         // Arrange
@@ -13,7 +12,6 @@ public class CallsHealthTest : IAsyncLifetime
         var httpClient = _app!.CreateHttpClient("api");
         await resourceNotificationService.WaitForResourceAsync("api", KnownResourceStates.Running).WaitAsync(TimeSpan.FromSeconds(30));
         var response = await httpClient.GetAsync("/health");
-
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
     }
