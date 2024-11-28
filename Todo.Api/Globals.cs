@@ -6,3 +6,4 @@ global using Todo.Api;
 global using Todo.Api.Common.Handlers;
 global using Ardalis.Result;
 global using Todo.Shared.Models.Request;
+global using Todo.Shared.Models.Response;

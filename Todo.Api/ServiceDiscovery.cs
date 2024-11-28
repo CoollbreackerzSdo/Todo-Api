@@ -14,6 +14,7 @@ using Todo.Api.Account.Models;
 using Todo.Api.Account.Validators;
 using Todo.Api.Common.Auth.Providers;
 using Todo.Api.TaskHear.Context;
+using Todo.Api.TaskHear.Context.Repository;
 
 namespace Todo.Api;
 
@@ -75,6 +76,7 @@ public static class ServiceDiscovery
     public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddTransient<IUserRepository, UserRepository>();
+        services.AddTransient<ITaskRepository, TaskRepository>();
         return services;
     }
     public static void MapMigrations(this WebApplication app)
