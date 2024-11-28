@@ -23,28 +23,28 @@ public static class ServiceDiscovery
 {
     public static IHostApplicationBuilder AddDbContexts(this IHostApplicationBuilder builder)
     {
-        //Production contexts
-        // builder.AddNpgsqlDbContext<AccountContext>("todo-db", null, options =>
-        // {
-        //     options.UseExceptionProcessor();
-        //     options.UseNpgsql();
-        // });
-        // builder.AddNpgsqlDbContext<TaskContext>("todo-db", null, options =>
-        // {
-        //     options.UseExceptionProcessor();
-        //     options.UseNpgsql();
-        // });
+        // Production contexts
+        builder.AddNpgsqlDbContext<AccountContext>("todo-db", null, options =>
+        {
+            options.UseExceptionProcessor();
+            options.UseNpgsql();
+        });
+        builder.AddNpgsqlDbContext<TaskContext>("todo-db", null, options =>
+        {
+            options.UseExceptionProcessor();
+            options.UseNpgsql();
+        });
         //Dev contexts
-        builder.Services.AddDbContext<AccountContext>(options =>
-        {
-            options.UseExceptionProcessor();
-            options.UseNpgsql();
-        });
-        builder.Services.AddDbContext<TaskContext>(options =>
-        {
-            options.UseExceptionProcessor();
-            options.UseNpgsql();
-        });
+        // builder.Services.AddDbContext<AccountContext>(options =>
+        // {
+        //     options.UseExceptionProcessor();
+        //     options.UseNpgsql();
+        // });
+        // builder.Services.AddDbContext<TaskContext>(options =>
+        // {
+        //     options.UseExceptionProcessor();
+        //     options.UseNpgsql();
+        // });
         return builder;
     }
     public static IServiceCollection AddValidators(this IServiceCollection services)
