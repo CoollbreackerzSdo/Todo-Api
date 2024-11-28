@@ -15,6 +15,7 @@ using Todo.Api.Account.Validators;
 using Todo.Api.Common.Auth.Providers;
 using Todo.Api.TaskHear.Context;
 using Todo.Api.TaskHear.Context.Repository;
+using Todo.Api.TaskHear.Endpoints;
 using Todo.Api.TaskHear.Handlers.Create;
 using Todo.Api.TaskHear.Validators;
 
@@ -93,6 +94,7 @@ public static class ServiceDiscovery
     public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder builder)
     {
         builder.MapAuthEndpoints();
+        builder.MapManagerTaskEndpoints();
         return builder;
     }
 }
