@@ -13,6 +13,7 @@ using Todo.Api.Account.Handlers.Create;
 using Todo.Api.Account.Models;
 using Todo.Api.Account.Validators;
 using Todo.Api.Common.Auth.Providers;
+using Todo.Api.TaskHear.Context;
 
 namespace Todo.Api;
 
@@ -21,17 +22,27 @@ public static class ServiceDiscovery
     public static IHostApplicationBuilder AddDbContexts(this IHostApplicationBuilder builder)
     {
         //Production contexts
-        builder.AddNpgsqlDbContext<AccountContext>("todo-db", null, options =>
-        {
-            options.UseExceptionProcessor();
-            options.UseNpgsql();
-        });
-        //Dev contexts
-        // builder.Services.AddDbContext<AccountContext>(options =>
+        // builder.AddNpgsqlDbContext<AccountContext>("todo-db", null, options =>
         // {
         //     options.UseExceptionProcessor();
         //     options.UseNpgsql();
         // });
+        // builder.AddNpgsqlDbContext<TaskContext>("todo-db", null, options =>
+        // {
+        //     options.UseExceptionProcessor();
+        //     options.UseNpgsql();
+        // });
+        //Dev contexts
+        builder.Services.AddDbContext<AccountContext>(options =>
+        {
+            options.UseExceptionProcessor();
+            options.UseNpgsql();
+        });
+        builder.Services.AddDbContext<TaskContext>(options =>
+        {
+            options.UseExceptionProcessor();
+            options.UseNpgsql();
+        });
         return builder;
     }
     public static IServiceCollection AddValidators(this IServiceCollection services)
@@ -68,7 +79,10 @@ public static class ServiceDiscovery
     }
     public static void MapMigrations(this WebApplication app)
     {
-        app.Services.CreateScope().ServiceProvider.GetRequiredService<AccountContext>().Database.Migrate();
+        using var accountContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<AccountContext>();
+        accountContext.Database.Migrate();
+        using var taskContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<TaskContext>();
+        taskContext.Database.Migrate();
     }
     public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder builder)
     {

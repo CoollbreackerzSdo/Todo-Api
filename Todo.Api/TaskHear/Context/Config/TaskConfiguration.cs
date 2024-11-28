@@ -32,6 +32,6 @@ public sealed class TaskConfiguration : ConfigurationBase<TaskEntity>
             .HasColumnName("register_date");
 
         builder.Property(x => x.RegisterTime)
-            .HasColumnName("register_date");
+            .HasColumnName("register_time");
     }
 }
