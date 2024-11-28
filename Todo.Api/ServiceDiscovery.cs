@@ -16,6 +16,7 @@ using Todo.Api.Common.Auth.Providers;
 using Todo.Api.TaskHear.Context;
 using Todo.Api.TaskHear.Context.Repository;
 using Todo.Api.TaskHear.Handlers.Create;
+using Todo.Api.TaskHear.Validators;
 
 namespace Todo.Api;
 
@@ -49,6 +50,7 @@ public static class ServiceDiscovery
     }
     public static IServiceCollection AddValidators(this IServiceCollection services)
     {
+        services.AddSingleton<IValidator<NewTaskRequest>, NewTaskRequestValidator>();
         services.AddSingleton<IValidator<SignUpRequest>, SignUpValidator>();
         return services;
     }
