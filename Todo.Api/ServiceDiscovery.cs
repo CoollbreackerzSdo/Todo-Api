@@ -15,6 +15,7 @@ using Todo.Api.Account.Validators;
 using Todo.Api.Common.Auth.Providers;
 using Todo.Api.TaskHear.Context;
 using Todo.Api.TaskHear.Context.Repository;
+using Todo.Api.TaskHear.Handlers.Create;
 
 namespace Todo.Api;
 
@@ -71,6 +72,7 @@ public static class ServiceDiscovery
     {
         services.AddTransient<IHandlerAsync<SignInRequest, IEnumerable<Claim>>, SigInHandler>();
         services.AddTransient<IHandlerAsync<SignUpRequest, IEnumerable<Claim>>, SigUpHandler>();
+        services.AddTransient<IHandlerAsync<(EntityKey<Guid> CreatorKey, NewTaskRequest Request), TaskViewResponse>, CreateTaskHandler>();
         return services;
     }
     public static IServiceCollection AddRepositories(this IServiceCollection services)
