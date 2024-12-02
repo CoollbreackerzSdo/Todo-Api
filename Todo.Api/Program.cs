@@ -16,6 +16,7 @@ builder.Services.AddHandlers();
 builder.Services.AddValidators();
 builder.Services.AddAuthServices();
 builder.Services.AddHahsServices();
+builder.Services.AddMiddlewares();
 
 var app = builder.Build();
 
@@ -33,6 +34,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapMiddlewares();
 app.MapDefaultEndpoints();
 app.MapEndpoints();
 

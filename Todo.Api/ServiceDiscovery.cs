@@ -13,6 +13,7 @@ using Todo.Api.Account.Handlers.Create;
 using Todo.Api.Account.Models;
 using Todo.Api.Account.Validators;
 using Todo.Api.Common.Auth.Providers;
+using Todo.Api.Common.Middlewares;
 using Todo.Api.TaskHear.Context;
 using Todo.Api.TaskHear.Context.Repository;
 using Todo.Api.TaskHear.Endpoints;
@@ -83,6 +84,15 @@ public static class ServiceDiscovery
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<ITaskRepository, TaskRepository>();
         return services;
+    }
+    public static IServiceCollection AddMiddlewares(this IServiceCollection service)
+    {
+        service.AddTransient<ErrorMiddleware>();
+        return service;
+    }
+    public static void MapMiddlewares(this WebApplication app)
+    {
+        app.UseMiddleware<ErrorMiddleware>();
     }
     public static void MapMigrations(this WebApplication app)
     {
