@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Security.Claims;
 
 using EntityFramework.Exceptions.PostgreSQL;
@@ -18,6 +19,7 @@ using Todo.Api.TaskHear.Context;
 using Todo.Api.TaskHear.Context.Repository;
 using Todo.Api.TaskHear.Endpoints;
 using Todo.Api.TaskHear.Handlers.Create;
+using Todo.Api.TaskHear.Handlers.Read;
 using Todo.Api.TaskHear.Validators;
 
 namespace Todo.Api;
@@ -77,6 +79,8 @@ public static class ServiceDiscovery
         services.AddTransient<IHandlerAsync<SignInRequest, IEnumerable<Claim>>, SigInHandler>();
         services.AddTransient<IHandlerAsync<SignUpRequest, IEnumerable<Claim>>, SigUpHandler>();
         services.AddTransient<IHandlerAsync<(EntityKey<Guid> CreatorKey, NewTaskRequest Request), TaskViewResponse>, CreateTaskHandler>();
+        services.AddTransient<IResponseHandler<ImmutableArray<TaskViewResponse>>, ReadTaskHandler>();
+        services.AddTransient<IHandler<Guid, TaskViewResponse>, ReadTaskHandler>();
         return services;
     }
     public static IServiceCollection AddRepositories(this IServiceCollection services)
