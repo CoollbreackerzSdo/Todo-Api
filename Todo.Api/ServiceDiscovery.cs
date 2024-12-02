@@ -81,6 +81,7 @@ public static class ServiceDiscovery
         services.AddTransient<IHandlerAsync<(EntityKey<Guid> CreatorKey, NewTaskRequest Request), TaskViewResponse>, CreateTaskHandler>();
         services.AddTransient<IResponseHandler<ImmutableArray<TaskViewResponse>>, ReadTaskHandler>();
         services.AddTransient<IHandler<Guid, TaskViewResponse>, ReadTaskHandler>();
+        services.AddTransient<IHandler<Guid, ImmutableArray<TaskViewResponse>>, ReadTaskHandler>();
         return services;
     }
     public static IServiceCollection AddRepositories(this IServiceCollection services)
