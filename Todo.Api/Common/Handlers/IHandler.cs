@@ -18,9 +18,9 @@ public interface IRequestHandlerAsync<TRequest>
 }
 public interface IResponseHandler<TResponse>
 {
-    TResponse Handle();
+    Result<TResponse> Handle();
 }
 public interface IHandlerAsync<TResponse>
 {
-    Task<TResponse> Handle(CancellationToken token = default);
+    Task<Result<TResponse>> Handle(CancellationToken token = default);
 }
